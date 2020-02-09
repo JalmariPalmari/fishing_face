@@ -41,5 +41,5 @@ const fishnote_view = (data) => {
     return html;
 };
 
-module.exports.notes_view = fishnotes_view;
-module.exports.note_view = fishnote_view;
+module.exports.fishnotes_view = fishnotes_view;
+module.exports.fishnote_view = fishnote_view;
