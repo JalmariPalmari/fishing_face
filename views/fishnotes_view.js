@@ -8,20 +8,20 @@ const fishnotes_view = ((data) => {
         </form>`;
 
 
-    data.notes.forEach((note) => {
-        html += note.text;
+    data.notes.forEach((fishnote) => {
+        html += fishnote.text;
         html += `
             <form action="delete-note" method="POST">
-                <input type="hidden" name="note_id" value="${note._id}">
-                <button type="submit">Delete note</button>
+                <input type="hidden" name="fishnote_id" value="${fishnote._id}">
+                <button type="submit">Delete fishnote</button>
             </form>
             `;
     });
 
     html += `
         <form action="/add-note" method="POST">
-            <input type="text" name="note">
-            <button type="submit">Add note</button>
+            <input type="text" name="fishnote">
+            <button type="submit">Add fishnote</button>
         </form>
     </html>
     </body>

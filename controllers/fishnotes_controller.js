@@ -1,34 +1,34 @@
-const note_model = require('../models/note-model');
-const note_views = require('../views/note-views');
+const fishnote_model = require('../models/fishnotes-models');
+const fishnote_view = require('../views/fishnotes-view');
 
 const get_fishnotes = (req, res, next) => {
     const user = req.user;
-    user.populate('fihs_notes')
+    user.populate('fishnotes')
         .execPopulate()
         .then(() => {
             console.log('user:', user);
             let data = {
                 user_name: user.name,
-                fish_notes: user.fish_notes
+                fish_notes: user.fishnotes
             };
-            let html = note_views.notes_view(data);
+            let html = fishnote_view.fishnotes_view(data);
             res.send(html);
         });
 };
 
 const post_delete_fishnote = (req, res, next) => {
     const user = req.user;
-    const fishnote_id_to_delete = req.body.note_id;
+    const fishnote_id_to_delete = req.body.fishnote_id;
 
     //Remove note from user.notes
-    const updated_fishnotes = user.notes.filter((note_id) => {
-        return note_id != fishnote_id_to_delete;
+    const updated_fishnotes = user.fishnotes.filter((fishnote_id) => {
+        return fishnote_id != fishnote_id_to_delete;
     });
     user.notes = updated_fishnotes;
 
     //Remove note object from database
     user.save().then(() => {
-        note_model.findByIdAndRemove(note_id_to_delete).then(() => {
+        note_model.findByIdAndRemove(fishnote_id_to_delete).then(() => {
             res.redirect('/');
         });
     });
@@ -36,25 +36,25 @@ const post_delete_fishnote = (req, res, next) => {
 
 const get_fishnote = (req, res, next) => {
     const fishnote_id = req.params.id;
-    note_model.findOne({
+    fishnote_model.findOne({
         _id: fishnote_id
     }).then((note) => {
         let data = {
             text: note.text
         };
-        let html = note_views.note_view(data);
+        let html = fishnotes_view.fishnote_view(data);
         res.send(html);
     });
 };
 
 const post_fishnote = (req, res, next) => {
     const user = req.user;
-    let new_note = note_model({
+    let new_fishnote = fishnotes_model({
         text: req.body.note
     });
-    new_note.save().then(() => {
+    new_fishnote.save().then(() => {
         console.log('note saved');
-        user.notes.push(new_note);
+        user.notes.push(new_fihsnote);
         user.save().then(() => {
             return res.redirect('/');
         });

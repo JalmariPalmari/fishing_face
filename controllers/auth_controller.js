@@ -1,5 +1,5 @@
 const user_model = require('../models/user-model');
-const auth_views = require('../views/auth-view');
+const auth_views = require('../views/auth_view');
 
 
 const handle_user = (req, res, next) => {
