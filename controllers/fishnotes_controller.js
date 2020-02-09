@@ -63,6 +63,6 @@ const post_fishnote = (req, res, next) => {
 
 
 module.exports.get_fishnotes = get_fishnotes;
-module.exports.get_note = get_fishnote;
-module.exports.post_note = post_fishnote;
+module.exports.get_fishnote = get_fishnote;
+module.exports.post_fishnote = post_fishnote;
 module.exports.post_delete_note = post_delete_fishnote;

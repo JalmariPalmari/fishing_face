@@ -38,7 +38,7 @@ const is_logged_handler = (req, res, next) => {
 //Serve Static files
 app.use('/css', express.static('css'))
 
-//Auth
+//Käyttäjän hallinta
 app.use(auth_controller.handle_user);
 app.get('/login', auth_controller.get_login);
 app.post('/login', auth_controller.post_login);
@@ -46,11 +46,11 @@ app.post('/register', auth_controller.post_register);
 app.post('/logout', auth_controller.post_logout);
 
 
-//Notes
-app.get('/', is_logged_handler, note_controller.get_notes);
-app.post('/delete-note', is_logged_handler, note_controller.post_delete_note);
-app.get('/note/:id', is_logged_handler, note_controller.get_note);
-app.post('/add-note', is_logged_handler, note_controller.post_note);
+//Hallitaan kaslastusmerkintöjä, varmistetaan käyttäjän kirjautuminen
+app.get('/', is_logged_handler, fishnotes_controller.get_fishnotes);
+app.post('/delete-note', is_logged_handler, fishnotes_controller.post_delete_fishnote);
+app.get('/note/:id', is_logged_handler, fishnotes_controller.get_fishnote);
+app.post('/add-note', is_logged_handler, fishnotes_controller.post_fishnote);
 
 app.use((req, res, next) => {
     res.status(404);
