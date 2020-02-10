@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 //Controllers
 const auth_controller = require('./controllers/auth_controller');
-const note_controller = require('./controllers/fishnotes_controller');
+const fishnotes_controller = require('./controllers/fishnotes_controller');
 
 let app = express();
 

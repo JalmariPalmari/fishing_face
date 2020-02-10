@@ -42,7 +42,7 @@ const get_fishnote = (req, res, next) => {
         let data = {
             text: note.text
         };
-        let html = fishnotes_view.fishnote_view(data);
+        let html = fishnote_view.fishnote_view(data);
         res.send(html);
     });
 };
@@ -65,4 +65,4 @@ const post_fishnote = (req, res, next) => {
 module.exports.get_fishnotes = get_fishnotes;
 module.exports.get_fishnote = get_fishnote;
 module.exports.post_fishnote = post_fishnote;
-module.exports.post_delete_note = post_delete_fishnote;
+module.exports.post_delete_fishnote = post_delete_fishnote;
