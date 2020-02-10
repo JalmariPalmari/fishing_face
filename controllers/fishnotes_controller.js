@@ -24,7 +24,7 @@ const post_delete_fishnote = (req, res, next) => {
     const updated_fishnotes = user.fishnotes.filter((fishnote_id) => {
         return fishnote_id != fishnote_id_to_delete;
     });
-    user.notes = updated_fishnotes;
+    user.fishnotes = updated_fishnotes;
 
     //Remove note object from database
     user.save().then(() => {
@@ -38,9 +38,9 @@ const get_fishnote = (req, res, next) => {
     const fishnote_id = req.params.id;
     fishnote_model.findOne({
         _id: fishnote_id
-    }).then((note) => {
+    }).then((fishnote) => {
         let data = {
-            text: note.text
+            text: fishnote.text
         };
         let html = fishnote_view.fishnote_view(data);
         res.send(html);
@@ -53,8 +53,8 @@ const post_fishnote = (req, res, next) => {
         text: req.body.note
     });
     new_fishnote.save().then(() => {
-        console.log('note saved');
-        user.notes.push(new_fihsnote);
+        console.log('fishnote saved');
+        user.fishnotes.push(new_fihsnote);
         user.save().then(() => {
             return res.redirect('/');
         });

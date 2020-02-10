@@ -8,7 +8,7 @@ const fishnotes_view = ((data) => {
         </form>`;
 
 
-    data.fishnotes.forEach((fishnote) => {
+    data.fishnote.forEach((fishnote) => {
         html += fishnote.text;
         html += `
             <form action="delete-note" method="POST">
