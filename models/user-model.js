@@ -8,7 +8,7 @@ const user_schema = new Schema({
     },
     notes: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'note',
+        ref: 'fishnote',
         req: true
     }]
 });

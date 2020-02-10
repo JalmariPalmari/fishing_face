@@ -28,7 +28,7 @@ const post_delete_fishnote = (req, res, next) => {
 
     //Remove note object from database
     user.save().then(() => {
-        note_model.findByIdAndRemove(fishnote_id_to_delete).then(() => {
+        fishnote_model.findByIdAndRemove(fishnote_id_to_delete).then(() => {
             res.redirect('/');
         });
     });
@@ -50,7 +50,7 @@ const get_fishnote = (req, res, next) => {
 const post_fishnote = (req, res, next) => {
     const user = req.user;
     let new_fishnote = fishnotes_model({
-        text: req.body.note
+        text: req.body.fishnote
     });
     new_fishnote.save().then(() => {
         console.log('fishnote saved');
