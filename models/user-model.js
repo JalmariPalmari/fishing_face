@@ -6,7 +6,7 @@ const user_schema = new Schema({
         type: String,
         required: true
     },
-    notes: [{
+    fishnotes: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'fishnote',
         req: true
