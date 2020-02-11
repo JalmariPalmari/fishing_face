@@ -1,5 +1,5 @@
-const fishnote_model = require('../models/fishnotes-models');
-const fishnote_view = require('../views/fishnotes-view');
+const fishnote_model = require('../models/fishnote-model');
+const fishnotes_view = require('../views/fishnotes-view');
 
 const get_fishnotes = (req, res, next) => {
     const user = req.user;
@@ -9,9 +9,9 @@ const get_fishnotes = (req, res, next) => {
             console.log('user:', user);
             let data = {
                 user_name: user.name,
-                fish_notes: user.fishnotes
+                fishnotes: user.fishnotes
             };
-            let html = fishnote_view.fishnotes_view(data);
+            let html = fishnotes_view.fishnotes_view(data);
             res.send(html);
         });
 };
@@ -42,19 +42,19 @@ const get_fishnote = (req, res, next) => {
         let data = {
             text: fishnote.text
         };
-        let html = fishnote_view.fishnote_view(data);
+        let html = fishnotes_view.fishnotes_view(data);
         res.send(html);
     });
 };
 
 const post_fishnote = (req, res, next) => {
     const user = req.user;
-    let new_fishnote = fishnotes_model({
+    let new_fishnote = fishnote_model({
         text: req.body.fishnote
     });
     new_fishnote.save().then(() => {
         console.log('fishnote saved');
-        user.fishnotes.push(new_fihsnote);
+        user.fishnotes.push(new_fishnote);
         user.save().then(() => {
             return res.redirect('/');
         });
