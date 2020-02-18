@@ -10,6 +10,11 @@ const user_schema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'fishnote',
         req: true
+    }],
+    kalastuspaivat: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'kalastuspaiva',
+        req: true
     }]
 });
 const user_model = mongoose.model('user', user_schema);

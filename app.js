@@ -8,6 +8,9 @@ const mongoose = require('mongoose');
 const auth_controller = require('./controllers/auth_controller');
 const fishnotes_controller = require('./controllers/fishnotes_controller');
 
+// vaaditaan kalastupaivan kontrolleri
+const kalastuspaiva_kontrolleri = require('./controllers/kalastuspaiva_kontrolleri');
+
 let app = express();
 
 app.use(body_parser.urlencoded({
@@ -38,6 +41,7 @@ const is_logged_handler = (req, res, next) => {
 //Serve Static files
 app.use('/css', express.static('css'))
 
+
 //Käyttäjän hallinta
 app.use(auth_controller.handle_user);
 app.get('/login', auth_controller.get_login);
@@ -47,11 +51,25 @@ app.post('/logout', auth_controller.post_logout);
 
 
 //Hallitaan kaslastusmerkintöjä, varmistetaan käyttäjän kirjautuminen
-app.get('/', is_logged_handler, fishnotes_controller.get_fishnotes);
-app.post('/delete-note', is_logged_handler, fishnotes_controller.post_delete_fishnote);
-app.get('/note/:id', is_logged_handler, fishnotes_controller.get_fishnote);
-app.post('/add-note', is_logged_handler, fishnotes_controller.post_fishnote);
+// app.get('/', is_logged_handler, fishnotes_controller.get_fishnotes);
+// app.post('/delete-note', is_logged_handler, fishnotes_controller.post_delete_fishnote);
+// app.get('/note/:id', is_logged_handler, fishnotes_controller.get_fishnote);
+// app.post('/add-note', is_logged_handler, fishnotes_controller.post_fishnote);
 
+// Kalastuspaivien hallinta
+
+
+// haetaan kalastuspaivat
+app.get('/', is_logged_handler, kalastuspaiva_kontrolleri.get_kalastuspaivat);
+// poistetaan kalastuspaiva
+app.post('/', is_logged_handler, kalastuspaiva_kontrolleri.post_poista_kalastuspaiva);
+// haetaan kalastuspaivan tiedot
+app.get('/alastuspaiva/:id', is_logged_handler, kalastuspaiva_kontrolleri.get_kalastuspaiva);
+// Lisätään kalastuspaiva
+app.post('/lisaa-kalastuspaiva', is_logged_handler, kalastuspaiva_kontrolleri.post_kalastuspaiva);
+
+
+// Jos sivua ei löydy tulostetaan virheilmoitus
 app.use((req, res, next) => {
     res.status(404);
     res.send(`
