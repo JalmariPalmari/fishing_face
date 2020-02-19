@@ -1,5 +1,5 @@
 const kalastuspaiva_model = require('../models/kalastuspaiva-model');
-const kalastuspaiva_view = require('../views/kalastuspaiva-view');
+const kalastuspaivat_view = require('../views/kalastuspaiva-view');
 
 const get_kalastuspaivat = (req, res, next) => {
     const user = req.user;
@@ -9,9 +9,9 @@ const get_kalastuspaivat = (req, res, next) => {
             console.log('user:', user);
             let data = {
                 user_name: user.name,
-                kalastuspaivat: user.kalastuspaivat
+                kalastuspaiva: user.kalastuspaivat
             };
-            let html = kalastuspaiva_view.kalastuspaiva_view(data);
+            let html = kalastuspaivat_view.kalastuspaivat_view(data);
             res.send(html);
         });
 };
@@ -21,10 +21,10 @@ const post_poista_kalastuspaiva = (req, res, next) => {
     const kalastuspaiva_id_poistetaan = req.body.kalastuspaiva_id;
 
     //Remove note from user.notes
-    const paivitetyt_kalastuspaivat = user.kalastuspaivat.filter((kalastuspaiva_id) => {
+    const paivitetyt_kalastuspaivat = user.kalastuspaiva.filter((kalastuspaiva_id) => {
         return kalastuspaiva_id != kalastuspaiva_id_poistetaan;
     });
-    user.kalastuspaivat = paivitetyt_kalastuspaivat;
+    user.kalastuspaiva = paivitetyt_kalastuspaivat;
 
     //Remove note object from database
     user.save().then(() => {
@@ -43,7 +43,7 @@ const get_kalastuspaiva = (req, res, next) => {
         let data = {
             text: kalastuspaiva.text
         };
-        let html = kalastuspaiva_view.kalastuspaiva_view(data);
+        let html = kalastuspaivat_view.kalastuspaiva_view(data);
         res.send(html);
     });
 };
@@ -55,7 +55,7 @@ const post_kalastuspaiva = (req, res, next) => {
     });
     uusi_kalastuspaiva.save().then(() => {
         console.log('kalastuspaiva tallennettu');
-        user.kalastuspaiva.push(uusi_kalastuspaiva);
+        user.kalastuspaivat.push(uusi_kalastuspaiva);
         user.save().then(() => {
             return res.redirect('/');
         });

@@ -51,8 +51,9 @@ const post_register = (req, res, next) => {
 
         let new_user = new user_model({
             name: user_name,
-            fishnotes: [],
             kalastuspaivat: []
+        //    fishnotes: []
+
         });
 
         new_user.save().then(() => {

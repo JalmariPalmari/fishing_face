@@ -6,10 +6,11 @@ const mongoose = require('mongoose');
 
 //Controllers
 const auth_controller = require('./controllers/auth_controller');
-const fishnotes_controller = require('./controllers/fishnotes_controller');
+//const fishnotes_controller = require('./controllers/fishnotes_controller');
 
 // vaaditaan kalastupaivan kontrolleri
 const kalastuspaiva_kontrolleri = require('./controllers/kalastuspaiva_kontrolleri');
+
 
 let app = express();
 
@@ -62,11 +63,11 @@ app.post('/logout', auth_controller.post_logout);
 // haetaan kalastuspaivat
 app.get('/', is_logged_handler, kalastuspaiva_kontrolleri.get_kalastuspaivat);
 // poistetaan kalastuspaiva
-app.post('/', is_logged_handler, kalastuspaiva_kontrolleri.post_poista_kalastuspaiva);
+app.post('/poista-kalastuspaiva', is_logged_handler,  kalastuspaiva_kontrolleri.post_poista_kalastuspaiva);
 // haetaan kalastuspaivan tiedot
-app.get('/alastuspaiva/:id', is_logged_handler, kalastuspaiva_kontrolleri.get_kalastuspaiva);
+app.get('/kalastuspaiva/:id', is_logged_handler,  kalastuspaiva_kontrolleri.get_kalastuspaiva);
 // Lisätään kalastuspaiva
-app.post('/lisaa-kalastuspaiva', is_logged_handler, kalastuspaiva_kontrolleri.post_kalastuspaiva);
+app.post('/lisaa-kalastuspaiva', is_logged_handler,  kalastuspaiva_kontrolleri.post_kalastuspaiva);
 
 
 // Jos sivua ei löydy tulostetaan virheilmoitus

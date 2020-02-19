@@ -2,13 +2,14 @@ const kalastuspaivat_view = ((data) => {
     let html = `
     <html>
     <body>
+        <h1> Kalastuspäiväkirja </h1>
         LOGGED IN USER: ${data.user_name}
         <form action="/logout" method="POST">
             <button type="submit">Log out</button>
         </form>`;
 
 
-    data.kalastuspaivat.forEach((kalastuspaiva) => {
+    data.kalastuspaiva.forEach((kalastuspaiva) => {
         html += kalastuspaiva.text;
         html += `
             <form action="/poista-kalastuspaiva" method="POST">
@@ -34,6 +35,7 @@ const kalastuspaiva_view = (data) => {
     let html = `
     <html>
     <body>
+        <h1> Kalastuspaivien näyttäminen </h1>
        Kalastuspaivan tiedot: ${data.text}
     </body>
     </html>
