@@ -6,11 +6,11 @@ const user_schema = new Schema({
         type: String,
         required: true
     },
-    fishnotes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'fishnote',
-        req: true
-    }],
+    // fishnotes: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'fishnote',
+    //     req: true
+    // }],
     kalastuspaivat: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'kalastuspaiva',
