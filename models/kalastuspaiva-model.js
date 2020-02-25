@@ -2,7 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const kalastuspaiva_schema = new Schema({
-    text: {
+    paivays: {
+        type: String,
+        required: true
+    },
+    paikka: {
+        type: String,
+        required: true
+    },
+    kommentit: {
         type: String,
         required: true
     }

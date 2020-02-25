@@ -50,13 +50,6 @@ app.post('/login', auth_controller.post_login);
 app.post('/register', auth_controller.post_register);
 app.post('/logout', auth_controller.post_logout);
 
-
-//Hallitaan kaslastusmerkintöjä, varmistetaan käyttäjän kirjautuminen
-// app.get('/', is_logged_handler, fishnotes_controller.get_fishnotes);
-// app.post('/delete-note', is_logged_handler, fishnotes_controller.post_delete_fishnote);
-// app.get('/note/:id', is_logged_handler, fishnotes_controller.get_fishnote);
-// app.post('/add-note', is_logged_handler, fishnotes_controller.post_fishnote);
-
 // Kalastuspaivien hallinta
 
 

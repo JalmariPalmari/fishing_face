@@ -9,19 +9,21 @@ const kalastuspaivat_view = ((data) => {
         </form>`;
 
 
-    data.kalastuspaiva.forEach((kalastuspaiva) => {
-        html += kalastuspaiva.text;
+    data.kalastuspaivat.forEach((kalastuspaiva) => {
+        html += `<p>Päivämäärä: ${kalastuspaiva.paivays} Paikka: ${kalastuspaiva.paikka} Kommentit: ${kalastuspaiva.kommentit}</p>`  
         html += `
             <form action="/poista-kalastuspaiva" method="POST">
                 <input type="hidden" name="kalastuspaiva_id" value="${kalastuspaiva._id}">
-                <button type="submit">Delete fishingday</button>
+                <button type="submit">Poista kalastuspäivä</button>
             </form>
             `;
     });
 
     html += `
         <form action="/lisaa-kalastuspaiva" method="POST">
-            <input type="text" name="kalastuspaiva">
+        <h2>Lisää uusi kalastuspäivä</h2>
+         <div><p>Päivämäärä: <input type="text" name="paivays"> Paikka: <input type="text" name="paikka"> 
+         Kommentit: <input type="text" name="kommentit"></p></div>
             <button type="submit">Lisää kalastuspäivä</button>
         </form>
     </html>
@@ -36,7 +38,7 @@ const kalastuspaiva_view = (data) => {
     <html>
     <body>
         <h1> Kalastuspaivien näyttäminen </h1>
-       Kalastuspaivan tiedot: ${data.text}
+       Kalastuspaivan tiedot: ${data.paivays, data.paikka, data.kommentit}
     </body>
     </html>
     `;
