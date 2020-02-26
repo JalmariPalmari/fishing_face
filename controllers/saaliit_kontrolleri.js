@@ -1,75 +1,76 @@
-const kalastuspaiva_model = require('../models/kalastuspaiva-model');
-const kalastuspaivat_view = require('../views/kalastuspaiva-view');
+const saaliit_model = require('../models/saaliit-model');
+const saaliit_view = require('../views/saaliit-view');
 
-const get_kalastuspaivat = (req, res, next) => {
+const get_saaliit = (req, res, next) => {
     const user = req.user;
-    user.populate('kalastuspaivat')
+    user.populate('kalastuspaiva.saaliit')
         .execPopulate()
         .then(() => {
             console.log('user:', user);
             let data = {
                 user_name: user.name,
-                kalastuspaivat: user.kalastuspaivat
-            };
-            let html = kalastuspaivat_view.kalastuspaivat_view(data);
+                saaliis: kalatuspaiva.saaliit
+            }; 
+            let html = saaliit_view.saaliit_view(data);
             res.send(html);
         });
 };
 
-const post_poista_kalastuspaiva = (req, res, next) => {
-    const user = req.user;
-    const kalastuspaiva_id_poistetaan = req.body.kalastuspaiva_id;
+// const post_poista_kalastuspaiva = (req, res, next) => {
+//     const user = req.user;
+//     const kalastuspaiva_id_poistetaan = req.body.kalastuspaiva_id;
 
-    //Poista kalastuspäivä
-    const paivitetyt_kalastuspaivat = user.kalastuspaivat.filter((kalastuspaiva_id) => {
-        return kalastuspaiva_id != kalastuspaiva_id_poistetaan;
-    });
-    user.kalastuspaiva = paivitetyt_kalastuspaivat;
+//     //Poista kalastuspäivä
+//     const paivitetyt_kalastuspaivat = user.kalastuspaivat.filter((kalastuspaiva_id) => {
+//         return kalastuspaiva_id != kalastuspaiva_id_poistetaan;
+//     });
+//     user.kalastuspaiva = paivitetyt_kalastuspaivat;
 
-    //Poista kalastuspäivä objecti tietokannasta
-    user.save().then(() => {
-        kalastuspaiva_model.findByIdAndRemove(kalastuspaiva_id_poistetaan).then(() => {
-            res.redirect('/');
-        });
-    });
-};
+//     //Poista kalastuspäivä objecti tietokannasta
+//     user.save().then(() => {
+//         kalastuspaiva_model.findByIdAndRemove(kalastuspaiva_id_poistetaan).then(() => {
+//             res.redirect('/');
+//         });
+//     });
+// };
 
-const get_kalastuspaiva = (req, res, next) => {
-    const kalastuspaiva_id = req.params.id;
-    kalastuspaiva_model.findOne({  
-        _id: kalastuspaiva_id
-    }).then((kalastuspaiva) => {
-        console.log('kalastuspaivat haettu');
+//Haetaan saliit mongoose schemasta
+const get_saaliitmongoose = (req, res, next) => {
+    const saaliitmongoose_id = req.params.id;
+    saaliit_model.findOne({  
+        _id: saaliitmongoose_id
+    }).then((saaliit) => {
+        console.log('saaliit haettu');
         let data = {
-            paivays: kalastuspaiva.paivays,
-            paikka: kalastuspaiva.paikka,
-            kommentit: kalastuspaiva.kommentit
+            kalalaji: saaliit.kalalaji,
+            paino: saaliit.paino,
+            saa: saaliit.sää
         
         };
-        let html = kalastuspaivat_view.kalastuspaiva_view(data);
+        let html = saaliit_view.saaliitmongoose_view(data);
         res.send(html);
     });
 };
 
 // selaimen kautta syötetyt parametrit käsitellään kontrollerissa ja työnnetään kalastuspäivän tietoihin
-const post_kalastuspaiva = (req, res, next) => {
+const post_saaliit = (req, res, next) => {
     const user = req.user;
-    let uusi_kalastuspaiva = kalastuspaiva_model({
-        paivays: req.body.paivays,
-        paikka: req.body.paikka,
-        kommentit: req.body.kommentit
+    let uusi_saalis = saaliit_model({
+        kalalaji: req.body.kalalaji,
+        paino: req.body.paino,
+        saa: req.body.saa
     });
-    uusi_kalastuspaiva.save().then(() => {
-        console.log('kalastuspaiva tallennettu');
-        user.kalastuspaivat.push(uusi_kalastuspaiva);
+    uusi_saalis.save().then(() => {
+        console.log('saalis tallennettu');
+        user.saaliit.push(uusi_saalis);
         user.save().then(() => {
-            return res.redirect('/');
+            return res.redirect('/saaliit');
         });
     });
 };
 
 
-module.exports.get_kalastuspaivat = get_kalastuspaivat;
-module.exports.get_kalastuspaiva = get_kalastuspaiva;
-module.exports.post_kalastuspaiva = post_kalastuspaiva;
-module.exports.post_poista_kalastuspaiva = post_poista_kalastuspaiva;
+module.exports.get_saaliit = get_saaliit;
+module.exports.get_saaliitmongoose = get_saaliitmongoose;
+module.exports.post_saaliit = post_saaliit;
+

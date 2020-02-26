@@ -1,4 +1,4 @@
-const kalastuspaivat_view = ((data) => {
+const saaliit_view = ((data) => {
     let html = `
     <html>
     <body>
@@ -9,26 +9,21 @@ const kalastuspaivat_view = ((data) => {
         </form>`;
 
 
-    data.kalastuspaivat.forEach((kalastuspaiva) => {
-        html += ` <p> Päivämäärä: ${kalastuspaiva.paivays} Paikka: ${kalastuspaiva.paikka} Kommentit: ${kalastuspaiva.kommentit}</p>`  
+    data.saaliit.forEach((saaliit) => {
+        html += ` <p> Päivämäärä: ${saaliit.kalalaji} ${saaliit.paino}${saaliit.saa} </p>`  
         html += `
-            <form action="/poista-kalastuspaiva" method="POST">
-                <input type="hidden" name="kalastuspaiva_id" value="${kalastuspaiva._id}">
-                <button type="submit">Poista kalastuspäivä</button>
+            <form action="/poista-saalis" method="POST">
+                <input type="hidden" name="saaliit_id" value="${saaliit._id}">
+                <button type="submit">Poista saalis</button>
             </form>
             `
-            html += `
-            <form action="/nayta-saaliit" method="POST">
-                <button type="submit">Näytä päivän saaliit</button>
-            </form>
-            `;
     });
 
     html += `
-        <form action="/lisaa-kalastuspaiva" method="POST">
-        <h2>Lisää uusi kalastuspäivä</h2>
-         <div><p>Päivämäärä: <input type="text" name="paivays"> Paikka: <input type="text" name="paikka"> 
-         Kommentit: <input type="text" name="kommentit"></p></div>
+        <form action="/lisaa-saalis" method="POST">
+        <h2>Lisää uusi saalis</h2>
+         <div><p>Kalalaji: <input type="text" name="kalalaji"> Paino: <input type="text" name="paino"> 
+         Sää: <input type="text" name="saa"></p></div>
             <button type="submit">Lisää kalastuspäivä</button>
         </form>
     </html>
@@ -38,17 +33,17 @@ const kalastuspaivat_view = ((data) => {
 });
 
 
-const kalastuspaiva_view = (data) => {
-    let html = `
-    <html>
-    <body>
-        <h1> Kalastuspaivien näyttäminen </h1>
-       Kalastuspaivan tiedot: ${data.paivays, data.paikka, data.kommentit}
-    </body>
-    </html>
-    `;
-    return html;
-};
+// const saaliitmongoose_view = (data) => {
+//     let html = `
+//     <html>
+//     <body>
+//         <h1> Kalastuspaivien näyttäminen </h1>
+//        Kalastuspaivan tiedot: ${data.saaliit}
+//     </body>
+//     </html>
+//     `;
+//     return html;
+// };
 
-module.exports.kalastuspaivat_view = kalastuspaivat_view;
-module.exports.kalastuspaiva_view = kalastuspaiva_view;
+module.exports.saaliit_view = saaliit_view;
+//module.exports.saaliitmongoose_view = saaliitmongoose_view;

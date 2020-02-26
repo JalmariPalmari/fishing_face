@@ -9,6 +9,7 @@ const get_kalastuspaivat = (req, res, next) => {
             console.log('user:', user);
             let data = {
                 user_name: user.name,
+                // parametri ForEachille
                 kalastuspaivat: user.kalastuspaivat
             };
             let html = kalastuspaivat_view.kalastuspaivat_view(data);
@@ -34,22 +35,22 @@ const post_poista_kalastuspaiva = (req, res, next) => {
     });
 };
 
-const get_kalastuspaiva = (req, res, next) => {
-    const kalastuspaiva_id = req.params.id;
-    kalastuspaiva_model.findOne({  
-        _id: kalastuspaiva_id
-    }).then((kalastuspaiva) => {
-        console.log('kalastuspaivat haettu');
-        let data = {
-            paivays: kalastuspaiva.paivays,
-            paikka: kalastuspaiva.paikka,
-            kommentit: kalastuspaiva.kommentit
+// const get_kalastuspaiva = (req, res, next) => {
+//     const kalastuspaiva_id = req.params.id;
+//     kalastuspaiva_model.findOne({  
+//         _id: kalastuspaiva_id
+//     }).then((kalastuspaiva) => {
+//         console.log('kalastuspaivat haettu');
+//         let data = {
+//             paivays: kalastuspaiva.paivays,
+//             paikka: kalastuspaiva.paikka,
+//             kommentit: kalastuspaiva.kommentit,
         
-        };
-        let html = kalastuspaivat_view.kalastuspaiva_view(data);
-        res.send(html);
-    });
-};
+//         };
+//         let html = kalastuspaivat_view.kalastuspaiva_view(data);
+//         res.send(html);
+//     });
+// };
 
 // selaimen kautta syötetyt parametrit käsitellään kontrollerissa ja työnnetään kalastuspäivän tietoihin
 const post_kalastuspaiva = (req, res, next) => {
@@ -70,6 +71,6 @@ const post_kalastuspaiva = (req, res, next) => {
 
 
 module.exports.get_kalastuspaivat = get_kalastuspaivat;
-module.exports.get_kalastuspaiva = get_kalastuspaiva;
+//module.exports.get_kalastuspaiva = get_kalastuspaiva;
 module.exports.post_kalastuspaiva = post_kalastuspaiva;
 module.exports.post_poista_kalastuspaiva = post_poista_kalastuspaiva;

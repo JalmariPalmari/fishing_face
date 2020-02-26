@@ -10,11 +10,16 @@ const saaliit_schema = new Schema({
         type: Number,
         required: true
     },
-    sää: {
+    saa: {
+        type: String,
+        required: true
+    },
+    image_url:{
         type: String,
         required: true
     }
+
 });
-const saaliit_model = new mongoose.model('saaliit', saaliit_schema);
+const saaliit_model = new mongoose.model('saaliis', saaliit_schema);
 
 module.exports = saaliit_model;

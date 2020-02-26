@@ -11,6 +11,7 @@ const auth_controller = require('./controllers/auth_controller');
 // vaaditaan kalastupaivan kontrolleri
 const kalastuspaiva_kontrolleri = require('./controllers/kalastuspaiva_kontrolleri');
 
+const saaliit_kontrolleri = require('./controllers/saaliit_kontrolleri');
 
 let app = express();
 
@@ -58,10 +59,13 @@ app.get('/', is_logged_handler, kalastuspaiva_kontrolleri.get_kalastuspaivat);
 // poistetaan kalastuspaiva
 app.post('/poista-kalastuspaiva', is_logged_handler,  kalastuspaiva_kontrolleri.post_poista_kalastuspaiva);
 // haetaan kalastuspaivan tiedot
-app.get('/kalastuspaiva/:id', is_logged_handler,  kalastuspaiva_kontrolleri.get_kalastuspaiva);
+//app.get('/kalastuspaiva/:id', is_logged_handler,  kalastuspaiva_kontrolleri.get_kalastuspaiva);
 // Lisätään kalastuspaiva
 app.post('/lisaa-kalastuspaiva', is_logged_handler,  kalastuspaiva_kontrolleri.post_kalastuspaiva);
 
+//
+app.get('/saaliit', is_logged_handler, saaliit_kontrolleri.get_saaliit);
+app.post('/lisaa-saalis', is_logged_handler, saaliit_kontrolleri.post_saaliit);
 
 // Jos sivua ei löydy tulostetaan virheilmoitus
 app.use((req, res, next) => {

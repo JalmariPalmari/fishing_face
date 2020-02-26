@@ -15,8 +15,10 @@ const kalastuspaiva_schema = new Schema({
         required: true
     },
     saaliit: [{
-        type: mongoose.Schema.types.ObjectId,
-        ref: 'saaliit'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'saaliis',
+        req: true
+      
     }]
 });
 const kalastuspaiva_model = new mongoose.model('kalastuspaiva', kalastuspaiva_schema);
