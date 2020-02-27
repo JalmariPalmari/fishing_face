@@ -11,6 +11,11 @@ const user_schema = new Schema({
         ref: 'kalastuspaiva',
         req: true
     }]
+    // saaliit: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'saaliit',
+    //     req: true
+    // }]
 });
 const user_model = mongoose.model('user', user_schema);
 

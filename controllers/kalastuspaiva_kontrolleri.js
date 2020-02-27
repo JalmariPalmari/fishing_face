@@ -10,7 +10,7 @@ const get_kalastuspaivat = (req, res, next) => {
             let data = {
                 user_name: user.name,
                 // parametri ForEachille
-                kalastuspaivat: user.kalastuspaivat
+                kalastuspaiva_foreach: user.kalastuspaivat
             };
             let html = kalastuspaivat_view.kalastuspaivat_view(data);
             res.send(html);
@@ -58,7 +58,8 @@ const post_kalastuspaiva = (req, res, next) => {
     let uusi_kalastuspaiva = kalastuspaiva_model({
         paivays: req.body.paivays,
         paikka: req.body.paikka,
-        kommentit: req.body.kommentit
+        kommentit: req.body.kommentit,
+        saaliit: req.body.saaliit
     });
     uusi_kalastuspaiva.save().then(() => {
         console.log('kalastuspaiva tallennettu');

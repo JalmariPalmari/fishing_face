@@ -9,7 +9,7 @@ const kalastuspaivat_view = ((data) => {
         </form>`;
 
 
-    data.kalastuspaivat.forEach((kalastuspaiva1) => {
+    data.kalastuspaiva_foreach.forEach((kalastuspaiva1) => {
         html += ` <p> Päivämäärä: ${kalastuspaiva1.paivays} Paikka: ${kalastuspaiva1.paikka} Kommentit: ${kalastuspaiva1.kommentit}</p>`  
         html += `
             <form action="/poista-kalastuspaiva" method="POST">

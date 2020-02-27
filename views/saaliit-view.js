@@ -9,8 +9,8 @@ const saaliit_view = ((data) => {
         </form>`;
 
 
-    data.saaliit.forEach((saaliit) => {
-        html += ` <p> Päivämäärä: ${saaliit.kalalaji} ${saaliit.paino}${saaliit.saa} </p>`  
+    data.saaliit.forEach((saaliis) => {
+        html += ` <p> Päivämäärä: ${saaliis.kalalaji} ${saaliis.paino}${saaliis.saa} </p>`  
         html += `
             <form action="/poista-saalis" method="POST">
                 <input type="hidden" name="saaliit_id" value="${saaliit._id}">

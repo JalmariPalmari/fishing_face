@@ -16,7 +16,7 @@ const kalastuspaiva_schema = new Schema({
     },
     saaliit: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'saaliis',
+        ref: 'saaliitmo',
         req: true
       
     }]

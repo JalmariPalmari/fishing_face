@@ -1,15 +1,23 @@
+const kalastuspaiva_model = require('../models/kalastuspaiva-model');
 const saaliit_model = require('../models/saaliit-model');
 const saaliit_view = require('../views/saaliit-view');
 
 const get_saaliit = (req, res, next) => {
+    const kalastuspaiva = req.kalastuspaiva;
     const user = req.user;
-    user.populate('kalastuspaiva.saaliit')
+    user.populate({
+        path: 'kalastuspaivat',
+        populate: {
+            path: 'saaliit',
+            model: 'kalastuspaiva'
+        }
+    })
         .execPopulate()
         .then(() => {
             console.log('user:', user);
             let data = {
                 user_name: user.name,
-                saaliis: kalatuspaiva.saaliit
+                saaliit: user.saliit
             }; 
             let html = saaliit_view.saaliit_view(data);
             res.send(html);
