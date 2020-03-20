@@ -9,7 +9,7 @@ const saaliit_view = ((data) => {
         </form>`;
 
 
-    data.saaliit.forEach((saaliis) => {
+    data.saaliit_foreach.forEach((saaliis) => {
         html += ` <p> Päivämäärä: ${saaliis.kalalaji} ${saaliis.paino}${saaliis.saa} </p>`  
         html += `
             <form action="/poista-saalis" method="POST">

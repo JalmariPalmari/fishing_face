@@ -3,22 +3,27 @@ const saaliit_model = require('../models/saaliit-model');
 const saaliit_view = require('../views/saaliit-view');
 
 const get_saaliit = (req, res, next) => {
-    const kalastuspaiva = req.kalastuspaiva;
     const user = req.user;
     user.populate({
-        path: 'kalastuspaivat',
+        path:'kalastuspaivaMongoObject',
+        model: 'user',
         populate: {
             path: 'saaliit',
-            model: 'kalastuspaiva'
+            model: 'saaliitmongo'
         }
-    })
+      })
         .execPopulate()
+        console.log('Populate saaliit OK')
+     
         .then(() => {
+            console.log('THEN?????')
             console.log('user:', user);
             let data = {
                 user_name: user.name,
-                saaliit: user.saliit
-            }; 
+                // parametri ForEachille
+                saaliit_foreach: user.kalastuspaivaMongoObject.saaliit
+               // saaliit_foreach: user.kalastuspaivaMongoObject.saaliit
+            };
             let html = saaliit_view.saaliit_view(data);
             res.send(html);
         });

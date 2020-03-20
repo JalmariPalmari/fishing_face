@@ -3,14 +3,17 @@ const kalastuspaivat_view = require('../views/kalastuspaiva-view');
 
 const get_kalastuspaivat = (req, res, next) => {
     const user = req.user;
-    user.populate('kalastuspaivat')
+
+    // haetaan user schema ja populeitataan kalastuspaiva objektit
+    user.populate('kalastuspaivaMongoObject')
         .execPopulate()
         .then(() => {
             console.log('user:', user);
             let data = {
                 user_name: user.name,
                 // parametri ForEachille
-                kalastuspaiva_foreach: user.kalastuspaivat
+                kalastuspaiva_foreach: user.kalastuspaivaMongoObject
+               // saaliit_foreach: user.kalastuspaivaMongoObject.saaliit
             };
             let html = kalastuspaivat_view.kalastuspaivat_view(data);
             res.send(html);
@@ -19,13 +22,13 @@ const get_kalastuspaivat = (req, res, next) => {
 
 const post_poista_kalastuspaiva = (req, res, next) => {
     const user = req.user;
-    const kalastuspaiva_id_poistetaan = req.body.kalastuspaiva_id;
+    const kalastuspaiva_id_poistetaan = req.body.kalastuspaivaMongoObject_id;
 
     //Poista kalastuspäivä
-    const paivitetyt_kalastuspaivat = user.kalastuspaivat.filter((kalastuspaiva_id) => {
-        return kalastuspaiva_id != kalastuspaiva_id_poistetaan;
+    const paivitetyt_kalastuspaivat = user.kalastuspaivaMongoObject.filter((kalastuspaivaMongoObject_id) => {
+        return kalastuspaivaMongoObject_id != kalastuspaiva_id_poistetaan;
     });
-    user.kalastuspaiva = paivitetyt_kalastuspaivat;
+    user.kalastuspaivaMongoObject = paivitetyt_kalastuspaivat;
 
     //Poista kalastuspäivä objecti tietokannasta
     user.save().then(() => {
@@ -63,7 +66,7 @@ const post_kalastuspaiva = (req, res, next) => {
     });
     uusi_kalastuspaiva.save().then(() => {
         console.log('kalastuspaiva tallennettu');
-        user.kalastuspaivat.push(uusi_kalastuspaiva);
+        user.kalastuspaivaMongoObject.push(uusi_kalastuspaiva);
         user.save().then(() => {
             return res.redirect('/');
         });

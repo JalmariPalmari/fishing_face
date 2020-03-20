@@ -13,7 +13,7 @@ const kalastuspaivat_view = ((data) => {
         html += ` <p> Päivämäärä: ${kalastuspaiva1.paivays} Paikka: ${kalastuspaiva1.paikka} Kommentit: ${kalastuspaiva1.kommentit}</p>`  
         html += `
             <form action="/poista-kalastuspaiva" method="POST">
-                <input type="hidden" name="kalastuspaiva_id" value="${kalastuspaiva1._id}">
+                <input type="hidden" name="kalastuspaivaMongoObject_id" value="${kalastuspaiva1._id}">
                 <button type="submit">Poista kalastuspäivä</button>
             </form>
             `

@@ -6,16 +6,11 @@ const user_schema = new Schema({
         type: String,
         required: true
     },
-    kalastuspaivat: [{
+    kalastuspaivaMongoObject: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'kalastuspaiva',
+        ref: 'kalastuspaivaMongoModel',
         req: true
     }]
-    // saaliit: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'saaliit',
-    //     req: true
-    // }]
 });
 const user_model = mongoose.model('user', user_schema);
 

@@ -16,11 +16,11 @@ const kalastuspaiva_schema = new Schema({
     },
     saaliit: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'saaliitmo',
-        req: true
+        ref: 'saaliitmongo'
       
     }]
 });
-const kalastuspaiva_model = new mongoose.model('kalastuspaiva', kalastuspaiva_schema);
+
+const kalastuspaiva_model = new mongoose.model('kalastuspaivaMongoModel', kalastuspaiva_schema);
 
 module.exports = kalastuspaiva_model;

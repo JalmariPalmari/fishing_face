@@ -19,6 +19,6 @@ const saaliit_schema = new Schema({
     }
 
 });
-const saaliit_model = new mongoose.model('saaliitmo', saaliit_schema);
+const saaliit_model = new mongoose.model('saaliitmongo', saaliit_schema);
 
 module.exports = saaliit_model;
