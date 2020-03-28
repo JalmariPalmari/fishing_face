@@ -66,6 +66,9 @@ app.post('/lisaa-kalastuspaiva', is_logged_handler,  kalastuspaiva_kontrolleri.p
 //
 app.get('/saaliit', is_logged_handler, saaliit_kontrolleri.get_saaliit);
 app.post('/lisaa-saalis', is_logged_handler, saaliit_kontrolleri.post_saaliit);
+app.post('/poista-saalis', is_logged_handler, saaliit_kontrolleri.post_poista_saalis);
+
+app.get('/saaliit-paivamaara', is_logged_handler, saaliit_kontrolleri.get_saaliitpaivamaara);
 
 // Jos sivua ei löydy tulostetaan virheilmoitus
 app.use((req, res, next) => {

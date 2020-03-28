@@ -1,6 +1,7 @@
 const kalastuspaiva_model = require('../models/kalastuspaiva-model');
 const kalastuspaivat_view = require('../views/kalastuspaiva-view');
 
+
 const get_kalastuspaivat = (req, res, next) => {
     const user = req.user;
 
@@ -58,8 +59,9 @@ const post_poista_kalastuspaiva = (req, res, next) => {
 // selaimen kautta syötetyt parametrit käsitellään kontrollerissa ja työnnetään kalastuspäivän tietoihin
 const post_kalastuspaiva = (req, res, next) => {
     const user = req.user;
+    var date = new Date()
     let uusi_kalastuspaiva = kalastuspaiva_model({
-        paivays: req.body.paivays,
+        paivays: date.toDateString(),
         paikka: req.body.paikka,
         kommentit: req.body.kommentit,
         saaliit: req.body.saaliit

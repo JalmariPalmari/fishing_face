@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
 const kalastuspaiva_schema = new Schema({
     paivays: {
-        type: String,
+        type: Date,
         required: true
     },
     paikka: {
@@ -13,13 +14,15 @@ const kalastuspaiva_schema = new Schema({
     kommentit: {
         type: String,
         required: true
-    },
-    saaliit: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'saaliitmongo'
+    }
+    // saaliit: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'saaliitMongoModel',
+    //     req: true
       
-    }]
+    // }]
 });
+
 
 const kalastuspaiva_model = new mongoose.model('kalastuspaivaMongoModel', kalastuspaiva_schema);
 

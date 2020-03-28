@@ -13,7 +13,7 @@ const saaliit_view = ((data) => {
         html += ` <p> Päivämäärä: ${saaliis.kalalaji} ${saaliis.paino}${saaliis.saa} </p>`  
         html += `
             <form action="/poista-saalis" method="POST">
-                <input type="hidden" name="saaliit_id" value="${saaliit._id}">
+                <input type="hidden" name="saaliitMongoObject_id" value="${saaliis._id}">
                 <button type="submit">Poista saalis</button>
             </form>
             `
@@ -33,17 +33,4 @@ const saaliit_view = ((data) => {
 });
 
 
-// const saaliitmongoose_view = (data) => {
-//     let html = `
-//     <html>
-//     <body>
-//         <h1> Kalastuspaivien näyttäminen </h1>
-//        Kalastuspaivan tiedot: ${data.saaliit}
-//     </body>
-//     </html>
-//     `;
-//     return html;
-// };
-
 module.exports.saaliit_view = saaliit_view;
-//module.exports.saaliitmongoose_view = saaliitmongoose_view;

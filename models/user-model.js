@@ -10,7 +10,14 @@ const user_schema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'kalastuspaivaMongoModel',
         req: true
+    }],
+    saaliitMongoObject: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'saaliitMongoModel',
+        req: true
+      
     }]
+
 });
 const user_model = mongoose.model('user', user_schema);
 
